@@ -1,3 +1,4 @@
+import 'package:classprogress1/profile.dart';
 import 'package:flutter/material.dart';
 
 class NotificationDetailPage extends StatelessWidget {
@@ -11,6 +12,19 @@ class NotificationDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Détails de la notification'),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_2_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Padding(

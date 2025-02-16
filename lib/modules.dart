@@ -1,6 +1,6 @@
-import 'package:classprogress1/listenotifications.dart';
+//import 'package:classprogress1/listenotifications.dart';
+import 'package:classprogress1/profile.dart';
 import 'package:flutter/material.dart';
-// Importe ta page Notification existante
 
 class Modules extends StatefulWidget {
   const Modules({super.key});
@@ -105,14 +105,15 @@ class _ModulesState extends State<Modules> {
       appBar: AppBar(
         title: const Text("Modules"),
         backgroundColor: const Color.fromARGB(255, 180, 131, 131),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(Icons.person_2_rounded),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NotificationPage(),
+                  builder: (context) => const Profile(),
                 ),
               );
             },
@@ -174,6 +175,19 @@ class Cours extends StatelessWidget {
       appBar: AppBar(
         title: Text(module['name']!),
         backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_2_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

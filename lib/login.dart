@@ -1,160 +1,3 @@
-/*import 'package:classprogress1/modules.dart';
-import 'package:flutter/material.dart';
-
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<Login> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool isVisible = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      'asset/Images/login3.png',
-                      height: 80,
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "ClassProgress",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 40),
-
-                // Champ de saisie Numéro Matricule
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white10,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      hintText: "Numéro matricule",
-                      hintStyle: const TextStyle(color: Colors.white54),
-                      border: InputBorder.none,
-                      prefixIcon:
-                          const Icon(Icons.person, color: Colors.white70),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 15),
-                    ),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 15),
-
-                // Champ de saisie Mot de Passe
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white10,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: isVisible,
-                    decoration: InputDecoration(
-                      hintText: "Mot de passe",
-                      hintStyle: const TextStyle(color: Colors.white54),
-                      border: InputBorder.none,
-                      prefixIcon: const Icon(Icons.lock, color: Colors.white70),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        child: Icon(
-                          isVisible ? Icons.visibility_off : Icons.visibility,
-                          color: Colors.white70,
-                        ),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 15),
-                    ),
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 25),
-
-                // Bouton de connexion stylé
-                GestureDetector(
-                  onTap: () {
-                    if (emailController.text == "9503007" &&
-                        passwordController.text == "3IIDEMO") {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Modules()),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              "Veuillez renseigner les bonnes informations"),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF6A1B9A), // Violet foncé
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.purple.withOpacity(0.5),
-                          blurRadius: 8,
-                          spreadRadius: 2,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Connexion',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/
 import 'package:classprogress1/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
@@ -231,7 +74,20 @@ class _LoginPageState extends State<Login> {
                           controller: passwordController,
                           hint: "Mot de passe",
                           icon: Icons.lock,
-                          obscure: true,
+                          obscure: isVisible,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              isVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.white70,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                          ),
                           validator: (value) {
                             if (value == null || value.length < 6) {
                               return 'Mot de passe trop court';
@@ -289,6 +145,7 @@ class _LoginPageState extends State<Login> {
     required String hint,
     required IconData icon,
     bool obscure = false,
+    Widget? suffixIcon,
     required String? Function(String?) validator,
   }) {
     return TextFormField(
@@ -299,6 +156,7 @@ class _LoginPageState extends State<Login> {
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.white54),
         prefixIcon: Icon(icon, color: Colors.white70),
+        suffixIcon: suffixIcon,
         filled: true,
         fillColor: Colors.white10,
         border: OutlineInputBorder(

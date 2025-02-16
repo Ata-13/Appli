@@ -1,3 +1,4 @@
+import 'package:classprogress1/profile.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -67,6 +68,19 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(
         title: const Text('Mes Notifications'),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_2_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: _notifications.isEmpty
           ? const Center(

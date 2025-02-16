@@ -1,6 +1,9 @@
+import 'package:classprogress1/profile.dart';
 import 'package:flutter/material.dart';
 
 class TimetableApp extends StatelessWidget {
+  const TimetableApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,6 +14,8 @@ class TimetableApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -30,23 +35,23 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  void _logout() {
-    print("Déconnexion...");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Application'),
+        title: Text('Profile'),
         backgroundColor: Colors.deepPurple,
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.account_circle,
-              size: 30, // Augmente la taille ici
-            ),
-            onPressed: _logout,
+            icon: const Icon(Icons.person_2_rounded),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -55,8 +60,8 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         backgroundColor: Colors.deepPurple,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
+        selectedItemColor: const Color.fromARGB(255, 109, 58, 58),
+        unselectedItemColor: const Color.fromARGB(179, 112, 58, 58),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -76,16 +81,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Bienvenue sur l\'accueil!')),
-    );
-  }
-}
+
 
 class NotificationScreen extends StatelessWidget {
+  const NotificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +105,8 @@ class TimetablePage extends StatelessWidget {
     'Ven_16:00': 'Sport',
   };
 
+  TimetablePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +124,7 @@ class TimetablePage extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.purple[300]),
                   children: [
                     tableCell('Heure', true),
-                    ...days.map((day) => tableCell(day, true)).toList(),
+                    ...days.map((day) => tableCell(day, true)),
                   ],
                 ),
                 ...hours.map((hour) => TableRow(
@@ -131,7 +133,7 @@ class TimetablePage extends StatelessWidget {
                         ...days.map((day) {
                           String key = '${day}_$hour';
                           return tableCell(subjects[key] ?? '', false);
-                        }).toList(),
+                        }),
                       ],
                     ))
               ],
